@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import TestingModule from './components/TestingModule';
+import AccountModule from './components/AccountModule';
+import ReadingModule from './components/ReadingModule';
+import { useState } from 'react';
 
+// router add
 function App() {
+  const [page, setPage] = useState(<AccountModule/>)
+  // let page = <AccountModule/>
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='navigationDiv'>
+        <h2 className='mainLabel'><span className='redLabel'>Neural</span>English</h2>
+        <div>
+          <button className='navigationButton' onClick={()=>{setPage(<ReadingModule/>)}}>Reading</button>
+          <button className='navigationButton' onClick={()=>{setPage(<TestingModule/>)}}>Tests</button>
+          <button className='navigationButton' onClick={()=>{setPage(<AccountModule/>)}}><img className='iconAccount'
+           src='https://static-00.iconduck.com/assets.00/profile-circle-icon-512x511-27c2rv9p.png'
+           alt='iconAccount'></img>Account</button>
+        </div>
+      </div>
+      <div>
+        {page}
+      </div>
     </div>
   );
 }
