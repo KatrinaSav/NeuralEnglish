@@ -2,18 +2,18 @@
   text-align: center;
 }
 
-.navigationDiv{
-  background-color: #FFE790;
+.navigationDiv {
+  background-color: #ffe790;
   max-height: 4.3%;
   text-align: center;
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-.navigationButton{
+.navigationButton {
   border: 0px;
   color: #474747;
-  background-color: #FFE790;
+  background-color: #ffe790;
   /* text-align: center; */
   font-family: 'Livvic';
   font-size: 20px;
@@ -23,30 +23,26 @@
   align-items: center;
 }
 
-/* .navigationButton: { */
-  /* background-color: #000000; */
-/* } */
-
-.navigationButton:hover{
-  background-color: #FFEBA6;
+.navigationButton:hover {
+  background-color: #ffeba6;
 }
 
-.iconAccount{
+.iconAccount {
   width: 32px;
   height: 32px;
   filter: grayscale(0%);
 }
 
-.mainLabel{
+.mainLabel {
   margin-left: 15px;
   font-family: 'Livvic';
   font-size: 20px;
   color: #474747;
 }
 
-.redLabel{
+.redLabel {
   font-family: 'Livvic';
   font-size: 20px;
   font-weight: bold;
-  color: #FF5959;
+  color: #ff5959;
 }
