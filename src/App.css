@@ -2,29 +2,30 @@
   text-align: center;
 }
 
+.navPanel {
+}
 .navigationDiv {
   background-color: #ffe790;
   max-height: 4.3%;
   text-align: center;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.navigationButton {
+.navLink {
   border: 0px;
+  text-decoration: none;
   color: #474747;
   background-color: #ffe790;
-  /* text-align: center; */
   font-family: 'Livvic';
   font-size: 20px;
-  margin: 5px;
   margin-left: 100px;
   margin-right: 20px;
-  align-items: center;
 }
 
-.navigationButton:hover {
-  background-color: #ffeba6;
+.navLink:hover {
+  color: #ffffff;
 }
 
 .iconAccount {
@@ -37,6 +38,7 @@
   margin-left: 15px;
   font-family: 'Livvic';
   font-size: 20px;
+  display: inline-block;
   color: #474747;
 }
 
