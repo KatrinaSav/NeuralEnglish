@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
-import { CounterReducer } from './ExampleReducer'
+import { UserReducer } from './UserReducer'
+import { configureStore } from '@reduxjs/toolkit'
 
-const rootReducer = combineReducers({ count: CounterReducer })
+const rootReducer = combineReducers({ user: UserReducer })
 const store = configureStore({ reducer: rootReducer })
+export { store }

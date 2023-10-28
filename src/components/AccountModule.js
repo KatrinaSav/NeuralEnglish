@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const AccountModule = () => {
-    return <p>AccountModule</p>
-    const [tasks, setTasks] = useState(null);
-    useEffect(() => {
-        fetch('http://localhost:8080/testing')
-        .then((response) => response.json()).catch(console.log("Kek"))
-        .then((json) => {
-            setTasks(json);
-        });
-    }, []);
-return tasks
-} 
+  const dispatch = useDispatch()
+  const id = useSelector((state) => state.user.userId)
+  console.log(id)
+  dispatch({
+    type: 'LOGIN',
+    id: 29,
+  })
+  console.log(id)
+  return <p>AccountModule:{id}</p>
+}
 
 export default AccountModule
