@@ -26,11 +26,9 @@ def get_articles(account_id):
     print(list_from_db)
     result = []
     for article in list_from_db:
-        lol = {"Id": article[0],
-               "Link": article[1],
-               "Name": article[2],
-               "Id_user": article[3],
-               "Progress": article[4]}
+        lol = {"id": article[0],
+               "name": article[1],
+               "progress": article[2]}
         result.append(lol)
     return result
 

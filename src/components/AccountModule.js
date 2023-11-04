@@ -6,11 +6,9 @@ const AccountModule = () => {
   const dispatch = useDispatch()
   const id = useSelector((state) => state.user.userId)
   console.log(id)
-  dispatch({
-    type: 'LOGIN',
-    id: 29,
-  })
+
   console.log(id)
+
   return <p>AccountModule:{id}</p>
 }
 

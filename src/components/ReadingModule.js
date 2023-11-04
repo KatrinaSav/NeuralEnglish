@@ -1,8 +1,12 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import SidePannel from './SidePannel'
 
 const ReadingModule = () => {
-  return <p>ReadingModule</p>
+  return (
+    <>
+      <SidePannel />
+    </>
+  )
 }
 
 export default ReadingModule
