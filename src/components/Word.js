@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import './Word.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActiveWordAction } from '../store/CurrentArticleReducer'
-import SoundButton from './SoundButton'
 
 const Word = ({ word, index, style }) => {
   const dispatch = useDispatch()
