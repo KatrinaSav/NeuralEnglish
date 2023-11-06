@@ -13,12 +13,21 @@ def close_connection(connection, cursor):
     connection.close()
 
 
-def db_get_article(user):
+def db_get_articles(user):
     connection, cursor = open_connection()
-    cursor.execute(f'''SELECT "Article"."Id", "Article"."Name","UserToArticles"."Progress" FROM "UserToArticles" 
+    cursor.execute(f'''SELECT "Article"."Id", "Article"."Name","UserToArticles"."Progress", "Article"."Page_count" FROM "UserToArticles" 
     INNER JOIN "Article" ON "Article"."Id" = "UserToArticles"."Id_article" WHERE "UserToArticles"."Id_user" = {user}''')
     result = cursor.fetchall()
-    print("result")
     close_connection(connection, cursor)
     return result
+
+def db_get_article(id, page):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "ArticleContent"."Text" FROM "Article"  INNER JOIN "ArticleContent" ON "ArticleContent"."Id_article" = "Article"."Id"
+WHERE "Article"."Id" = {id} AND "ArticleContent"."Page_number" ={page}''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
+
+
 

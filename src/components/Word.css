@@ -1,0 +1,11 @@
+.activeWord {
+  background-color: yellow;
+}
+
+.word {
+  color: red;
+}
+
+.soundBtn {
+  position: absolute;
+}
