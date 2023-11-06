@@ -1,4 +1,9 @@
-const initialState = { article: { id: 0 }, page: 1, text: 'o', activeWord: -1 }
+const initialState = {
+  article: { id: 0 },
+  page: 1,
+  text: 'o',
+  activeWord: { index: -1, button: 0 },
+}
 const SET_ARTICLE = 'SET_ARTICLE'
 const SET_PAGE = 'SET_PAGE'
 const SET_TEXT = 'SET_TEXT'

@@ -1,9 +1,11 @@
 .activeWord {
   background-color: yellow;
+  padding-top: 10px;
 }
 
 .word {
   color: red;
+  padding-top: 10px;
 }
 
 .soundBtn {

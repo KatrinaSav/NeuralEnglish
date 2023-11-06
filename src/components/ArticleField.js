@@ -1,5 +1,6 @@
 import React from 'react'
 import Word from './Word'
+import './ArticleField.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import {
@@ -15,7 +16,9 @@ const ArticleField = () => {
   )
   const page = useSelector((state) => state.currentArticle.page)
   const text = useSelector((state) => state.currentArticle.text)
-  const activeWord = useSelector((state) => state.currentArticle.activeWord)
+  const activeWord = useSelector(
+    (state) => state.currentArticle.activeWord.index
+  )
 
   useEffect(() => {
     fetch(`http://localhost:8000/article/${articleId}/${page}`)
@@ -30,14 +33,13 @@ const ArticleField = () => {
 
   let textToview = words.map((element, index) => {
     let style = 'word'
-    console.log('rerender')
     if (index === activeWord) style = 'activeWord'
     return <Word word={element} index={index} style={style} />
   })
   console.log(words, textToview)
   return (
     <div className="articleField">
-      {textToview}
+      <div className="textField">{textToview}</div>
       <button
         className="btnPrev"
         onClick={() => {
