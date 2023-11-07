@@ -1,15 +1,14 @@
 const initialState = {
-  article: { id: 0 },
+  article: { id: 1 },
   page: 1,
-  text: 'o',
-  activeWord: { index: -1, button: 0 },
+  text: '',
+  activeWord: -1,
 }
 const SET_ARTICLE = 'SET_ARTICLE'
 const SET_PAGE = 'SET_PAGE'
 const SET_TEXT = 'SET_TEXT'
 const SET_ACTIVE_WORD = 'SET_ACTIVE_WORD'
 export const CurrentArticlesReducer = (state = initialState, action) => {
-  console.log('REducer', action)
   switch (action.type) {
     case SET_ARTICLE:
       return { ...state, article: action.article }

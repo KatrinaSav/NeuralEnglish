@@ -6,45 +6,21 @@ import { setActiveWordAction } from '../store/CurrentArticleReducer'
 
 const Word = ({ word, index, style }) => {
   const dispatch = useDispatch()
-  let ref = useRef()
-  const [sound, setSound] = useState()
-
-  let soundBtn
-  useEffect(() => {
-    const rect = ref.current.getBoundingClientRect()
-    soundBtn = (
-      <button
-        className="soundBtn"
-        style={{
-          left: rect.left,
-          top: rect.top - rect.height + 28,
-        }}
-        onClick={() => console.log('click')}
-      >
-        Click
-      </button>
-    )
-    setSound(soundBtn)
-  }, [])
-  let btn = useSelector((state) => state.currentArticle.activeWord.button)
-  console.log(btn)
 
   return (
     <>
       <span
-        ref={ref}
         onMouseEnter={() => {
-          dispatch(setActiveWordAction({ index: index, button: sound }))
+          dispatch(setActiveWordAction(index))
         }}
-        onMouseLeave={() =>
-          dispatch(setActiveWordAction({ index: -1, button: null }))
-        }
+        onMouseLeave={() => {
+          dispatch(setActiveWordAction(-1))
+        }}
         className={style}
       >
         {word}
       </span>
       <span> </span>
-      {style === 'activeWord' ? btn : null}
     </>
   )
 }

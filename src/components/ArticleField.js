@@ -16,18 +16,17 @@ const ArticleField = () => {
   )
   const page = useSelector((state) => state.currentArticle.page)
   const text = useSelector((state) => state.currentArticle.text)
-  const activeWord = useSelector(
-    (state) => state.currentArticle.activeWord.index
-  )
+  const activeWord = useSelector((state) => state.currentArticle.activeWord)
 
-  useEffect(() => {
+  articlePageCount &&
     fetch(`http://localhost:8000/article/${articleId}/${page}`)
       .then((response) => response.json())
       .then((json) => {
+        console.log(articleId, page)
+        console.log(json)
         dispatch(setCurrentTextAction(json['0'].text))
       })
       .catch(console.log('Kek'))
-  }, [articleId, page])
 
   let words = text.split(' ')
 
@@ -36,7 +35,6 @@ const ArticleField = () => {
     if (index === activeWord) style = 'activeWord'
     return <Word word={element} index={index} style={style} />
   })
-  console.log(words, textToview)
   return (
     <div className="articleField">
       <div className="textField">{textToview}</div>

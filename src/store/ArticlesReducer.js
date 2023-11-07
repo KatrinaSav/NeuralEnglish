@@ -1,6 +1,6 @@
 let test = []
 
-await fetch('http://localhost:8000/articles/0')
+await fetch('http://localhost:8000/articles/1')
   .then((response) => response.json())
   .then((json) => {
     for (let element in json) {
