@@ -18,7 +18,7 @@ const ArticleField = () => {
   const text = useSelector((state) => state.currentArticle.text)
   const activeWord = useSelector((state) => state.currentArticle.activeWord)
 
-  articlePageCount &&
+  useEffect(() => {
     fetch(`http://localhost:8000/article/${articleId}/${page}`)
       .then((response) => response.json())
       .then((json) => {
@@ -27,6 +27,7 @@ const ArticleField = () => {
         dispatch(setCurrentTextAction(json['0'].text))
       })
       .catch(console.log('Kek'))
+  }, [articleId, page])
 
   let words = text.split(' ')
 
