@@ -1,8 +1,8 @@
-const initialState = { userId: 0 }
-
-const UserReducer = (state = initialState, action) => {
+const initialState = { userId: 1 }
+const LOGIN = 'LOGIN'
+export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case LOGIN:
       return { ...state, userId: action.id }
     case 'GET':
       return { ...state }
@@ -10,4 +10,5 @@ const UserReducer = (state = initialState, action) => {
       return state
   }
 }
-export { UserReducer }
+
+export const loginUserAction = (id) => ({ type: LOGIN, id })

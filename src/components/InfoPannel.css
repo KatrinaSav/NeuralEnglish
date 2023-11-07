@@ -1,0 +1,22 @@
+.wordInfoBtn {
+  min-width: 120px;
+  min-height: 30px;
+  background-color: #ffe68e;
+  border: none;
+}
+.activeWordInfoBtn {
+  min-width: 120px;
+  min-height: 30px;
+  background-color: #fff9e2;
+  border: none;
+}
+.infoContent {
+  background-color: #fff9e2;
+}
+
+.infoContent h4,
+h5,
+h6,
+p {
+  margin: 0px;
+}

@@ -4,4 +4,28 @@
 
 .textField {
   padding: 20px;
+  border: #ffe790 solid 1px;
+  border-radius: 5px;
+  min-height: 100px;
+  min-width: 700px;
+  max-width: 700px;
+}
+
+.pageBtn:disabled {
+  background-color: white;
+}
+
+.pageBtn {
+  background-color: #ffe790;
+  border: solid 1px #ffe790;
+  border-radius: 2px;
+  min-height: 25px;
+  min-width: 70px;
+}
+
+.articleName {
+  font-family: 'Livvic';
+  font-size: 32px;
+  color: #474747;
+  font-weight: 400;
 }

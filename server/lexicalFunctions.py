@@ -6,18 +6,33 @@ from PyDictionary import PyDictionary
 
 nlp = spacy.load("en_core_web_sm")
 
+def get_meaning(word):
+    dictionary = PyDictionary()
+    result = dictionary.meaning(word)
+    if result == None:
+        return {'Oops!':["We don't know what it is..."]}
+    for key in result:
+        while len(result[key]) > 2:
+            result[key].pop()
+    return result
+
+def get_normal_form(word):
+    doc = nlp(word)
+    return doc[0].lemma_
+
+def get_usage(word):
+    client = Client("en", "ru")
+    result =[]
+    count = 0
+    for context in client.get_translation_samples(word, cleanup=True):
+        result.append(context[0])
+        count += 1
+        if count > 4:
+            break
+    return result
+
 if __name__=='__main__':
 
-    client = Client("en", "ru")
-    count = 0
-    for context in client.get_translation_samples("begun", cleanup=True):
-        print(context[0])
-        count+=1
-        if count>10:
-            break
-
-    dictionary = PyDictionary()
-    print(dictionary.meaning("dwarf"))
     # Слово для анализа
     word = "begin"
 
@@ -36,10 +51,3 @@ if __name__=='__main__':
 
     forms = getInflection(word, tag='VBP')  # Настоящее время, форма 1
     print(forms)
-    print(wn.synset('dwarf.n.01').definition())
-    for e in wn.synset('camping.n.01').examples():
-        print(e)
-    doc = nlp('prayed')
-
-    for token in doc:
-        print(token.text, token.pos_)

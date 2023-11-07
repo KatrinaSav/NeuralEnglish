@@ -12,7 +12,6 @@ function App() {
   // articles.forEach((element) => {
 
   // })
-
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>

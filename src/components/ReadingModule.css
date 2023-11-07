@@ -1,0 +1,19 @@
+.readingPage {
+  display: grid;
+  grid-template-areas: 'nav article ads';
+  grid-template-rows: 1fr;
+  grid-template-columns: 15% 1fr 25%;
+  grid-gap: 10px;
+  height: 100vh;
+  margin: 0;
+}
+.article {
+  grid-area: article;
+}
+.side {
+  grid-area: nav;
+  background-color: #fff9e2;
+}
+.tools {
+  grid-area: ads;
+}

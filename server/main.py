@@ -3,6 +3,8 @@ from fastapi.responses import JSONResponse
 from db_request import db_get_articles, db_get_article
 from fastapi.middleware.cors import CORSMiddleware
 
+from lexicalFunctions import get_meaning, get_normal_form, get_usage
+
 app = FastAPI()
 origins = [
     "http://localhost.tiangolo.com",
@@ -43,6 +45,25 @@ def get_article(article_id, page):
         lol = {"text": article[0]}
         result.append(lol)
     return result
+
+@app.get("/meaning/{word}")
+def get_mean(word):
+    for char in '.,!?"\'&*()$%':
+        word.replace(char, "")
+    return get_meaning(word)
+
+@app.get("/normal/{word}")
+def get_normal(word):
+    for char in '.,!?"\'&*()$%':
+        word.replace(char, "")
+    return get_normal_form(word).capitalize()
+
+@app.get("/usage/{word}")
+def get_use(word):
+    for char in '.,!?"\'&*()$%':
+        word.replace(char, "")
+    return get_usage(word)
+
 
 # Для отправкт нескольких аргументов можно использовать ссылку следующего типа
 # http://127.0.0.1:8000/articles/some_id?arcticle=some_article_id&

@@ -17,6 +17,7 @@ const ArticleField = () => {
   const page = useSelector((state) => state.currentArticle.page)
   const text = useSelector((state) => state.currentArticle.text)
   const activeWord = useSelector((state) => state.currentArticle.activeWord)
+  const articleName = useSelector((state) => state.currentArticle.article.name)
 
   useEffect(() => {
     fetch(`http://localhost:8000/article/${articleId}/${page}`)
@@ -30,28 +31,30 @@ const ArticleField = () => {
   }, [articleId, page])
 
   let words = text.split(' ')
-
   let textToview = words.map((element, index) => {
     let style = 'word'
     if (index === activeWord) style = 'activeWord'
     return <Word word={element} index={index} style={style} />
   })
+
   return (
     <div className="articleField">
-      <div className="textField">{textToview}</div>
+      <h3 className="articleName">{articleName}</h3>
+      <div className="textField">{articlePageCount ? textToview : 'HeLLO'}</div>
       <button
-        className="btnPrev"
+        disabled={articlePageCount && page !== 1 ? false : true}
+        className="pageBtn"
         onClick={() => {
-          if (page !== 1) dispatch(setCurrentPageAction(page - 1))
+          dispatch(setCurrentPageAction(page - 1))
         }}
       >
         Previous
       </button>
       <button
-        className="btnNext"
+        disabled={articlePageCount && page !== articlePageCount ? false : true}
+        className="pageBtn"
         onClick={() => {
-          if (page !== articlePageCount)
-            dispatch(setCurrentPageAction(page + 1))
+          dispatch(setCurrentPageAction(page + 1))
         }}
       >
         Next
