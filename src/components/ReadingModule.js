@@ -5,6 +5,7 @@ import ArticleField from './ArticleField'
 import { getArticleAction } from '../store/ArticlesReducer'
 import { useEffect } from 'react'
 import InfoPannel from './InfoPannel'
+import AddArticlePannel from './AddArticlePannel'
 
 const ReadingModule = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const ReadingModule = () => {
           <ArticleField />
         </div>
         <div className="tools">
+          <AddArticlePannel />
           <InfoPannel />
         </div>
       </div>

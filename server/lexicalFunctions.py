@@ -1,9 +1,10 @@
+from bs4 import BeautifulSoup
 from pyinflect import getInflection
 from nltk.corpus import wordnet as wn
 import spacy
 from reverso_context_api import Client
 from PyDictionary import PyDictionary
-
+import requests
 nlp = spacy.load("en_core_web_sm")
 
 def get_meaning(word):
@@ -30,6 +31,23 @@ def get_usage(word):
         if count > 4:
             break
     return result
+
+def parse_article(url):
+    html_text = requests.get(url).text
+    soup = BeautifulSoup(html_text, 'lxml')
+    texts = soup.find_all('p','pw-post-body-paragraph')
+    paragraphs=[]
+    for text in texts:
+       paragraphs.append(text.text)
+    result_text = []
+    for i in range(len(paragraphs)):
+        if len(paragraphs[i]) < 700 and i!=len(paragraphs)-1:
+            result_text.append(paragraphs[i]+" "+paragraphs[i+1])
+            i+=1
+        else:
+            result_text.append(paragraphs[i])
+    return result_text
+
 
 if __name__=='__main__':
 

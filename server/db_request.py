@@ -29,5 +29,22 @@ WHERE "Article"."Id" = {id} AND "ArticleContent"."Page_number" ={page}''')
     close_connection(connection, cursor)
     return result
 
+def db_post_article(user_id, url, title, paragraphs):
+    connection, cursor = open_connection()
+    cursor.execute(f'''INSERT INTO public."Article"("Link", "Name", "Page_count")
+  VALUES ('{url}', '{title}', {len(paragraphs)}) RETURNING "Id"''')
+    connection.commit()
+    article_id = cursor.fetchall()[0][0]
+    for i in range(len(paragraphs)):
+        print(i)
+        cursor.execute(f'''INSERT INTO public."ArticleContent"("Id_article", "Page_number", "Text")
+      VALUES ({article_id}, {i+1}, '{paragraphs[i]}')''')
+        connection.commit()
+    cursor.execute(f'''INSERT INTO public."UserToArticles"("Id_article","Id_user")
+  VALUES ({article_id},{user_id});''')
+    connection.commit()
+    close_connection(connection, cursor)
+    return {"id":article_id,"name":title,"pageCount":len(paragraphs)}
+
 
 

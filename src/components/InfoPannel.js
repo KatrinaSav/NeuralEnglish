@@ -45,7 +45,7 @@ const InfoPannel = () => {
 
       case 'Usage':
         {
-          fetch(`http://localhost:8000/usage/${word}`)
+          fetch(`http://localhost:8000/usage/${word.toLowerCase()}`)
             .then((response) => response.json())
             .then((json) => {
               let answer = []
