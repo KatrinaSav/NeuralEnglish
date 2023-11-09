@@ -17,6 +17,8 @@ const AddArticlePannel = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, url }),
     }
+    setUrl('URL')
+    setTitle('Title')
     fetch(`http://localhost:8000/article/${userId}`, requestOptions)
       .then((response) => response.json())
       .then((json) => {
@@ -37,6 +39,7 @@ const AddArticlePannel = () => {
       <form onSubmit={handleSubmit}>
         <label>
           <input
+            autocomplete="off"
             onFocus={() => setTitle('')}
             type="text"
             name="title"
@@ -46,6 +49,7 @@ const AddArticlePannel = () => {
         </label>
         <label>
           <input
+            autocomplete="off"
             onFocus={() => setUrl('')}
             type="text"
             name="url"
