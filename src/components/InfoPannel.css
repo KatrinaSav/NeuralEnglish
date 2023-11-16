@@ -1,17 +1,26 @@
+.infoPannel {
+  margin-right: 20px;
+}
+
+.chooseInfo {
+  display: flex;
+  justify-content: stretch;
+}
 .wordInfoBtn {
-  min-width: 120px;
   min-height: 30px;
   background-color: #ffe68e;
   border: none;
+  flex-grow: 1;
 }
 .activeWordInfoBtn {
-  min-width: 120px;
   min-height: 30px;
   background-color: #fff9e2;
   border: none;
+  flex-grow: 1;
 }
 .infoContent {
   background-color: #fff9e2;
+  min-height: 400px;
 }
 
 .infoContent h4,

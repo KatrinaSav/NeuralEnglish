@@ -20,7 +20,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# разбить по файлам
+
 class Article_data(BaseModel):
     title: str
     url: str
@@ -51,31 +51,26 @@ def get_article(article_id, page):
 
 @app.get("/meaning/{word}")
 def get_mean(word):
-    for char in '.,!?"\'&*()$%':
-        word.replace(char, "")
+    for char in '“.,!?"\'*()$%':
+        word = word.replace(char, "")
     return get_meaning(word)
 
 @app.get("/normal/{word}")
 def get_normal(word):
-    for char in '.,!?"\'&*()$%':
-        word.replace(char, "")
+    for char in '“.,!?"\'*()$%':
+        word = word.replace(char, "")
     return get_normal_form(word).capitalize()
 
 @app.get("/usage/{word}")
 def get_use(word):
-    for char in '.,!?"\'&*()$%':
-        word.replace(char, "")
+    for char in '“.,!?"\'*()$%':
+        word = word.replace(char, "")
     return get_usage(word)
 
 
 # Для отправкт нескольких аргументов можно использовать ссылку следующего типа
 # http://127.0.0.1:8000/articles/some_id?arcticle=some_article_id&
 # Т.е. параметры можно кидать через ссылку после знака вопроса
-@app.get("/articles/{account_id}")
-def get_article(account_id, article_id):
-
-    return {"message": "article"}
-
 
 @app.post("/article/{account_id}", status_code=200)
 def post_article(request: Article_data, account_id):

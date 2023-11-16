@@ -1,14 +1,19 @@
 .articleField {
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .textField {
   padding: 20px;
   border: #ffe790 solid 1px;
   border-radius: 5px;
-  min-height: 100px;
+  min-height: 350px;
+  max-height: 350px;
   min-width: 700px;
   max-width: 700px;
+  margin-bottom: 10px;
 }
 
 .pageBtn:disabled {
@@ -19,8 +24,8 @@
   background-color: #ffe790;
   border: solid 1px #ffe790;
   border-radius: 2px;
-  min-height: 25px;
-  min-width: 70px;
+  min-height: 30px;
+  min-width: 90px;
 }
 
 .articleName {
@@ -28,4 +33,12 @@
   font-size: 32px;
   color: #474747;
   font-weight: 400;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.pageButtons {
+  display: flex;
+  min-width: 200px;
+  justify-content: space-between;
 }

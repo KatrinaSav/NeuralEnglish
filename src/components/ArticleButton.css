@@ -1,0 +1,43 @@
+.articleSide {
+  border: none;
+  margin-left: 8px;
+  display: flex;
+  flex-grow: 1;
+  justify-self: start;
+  background-color: #fff9e2;
+  font-family: 'Livvic';
+  font-size: 14px;
+  color: #474747;
+  font-weight: 100;
+}
+
+.articleSide:hover {
+  color: #ff5959;
+}
+
+.progress {
+  display: inline-block;
+  font-family: 'Livvic';
+  font-size: 14px;
+  color: #474747;
+  font-weight: 100;
+}
+
+.square {
+  display: inline-block;
+  min-width: 15px;
+  max-width: 15px;
+  min-height: 15px;
+  max-height: 15px;
+  background-color: #ffe68e;
+}
+.activeSquare {
+  background-color: #ff5959;
+}
+
+.ArticleButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 10px 0px 10px;
+}

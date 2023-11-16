@@ -46,5 +46,8 @@ def db_post_article(user_id, url, title, paragraphs):
     close_connection(connection, cursor)
     return {"id":article_id,"name":title,"pageCount":len(paragraphs)}
 
+def update_progress(article_id, page):
+    pass
+
 
 

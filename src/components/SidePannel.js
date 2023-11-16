@@ -7,36 +7,23 @@ import {
   setCurrentTextAction,
 } from '../store/CurrentArticleReducer'
 import { getArticleAction } from '../store/ArticlesReducer'
+import ArticleButton from './ArticleButton'
 
 const SidePannel = () => {
-  const dispatch = useDispatch()
-
   const articles = useSelector((state) => state.articles.articles)
+  const currentArticleId = useSelector(
+    (state) => state.currentArticle.article.id
+  )
   console.log('articles', articles)
   let column = []
   for (let a of articles) {
     column.push(
-      <button
-        className="articleBtn"
-        key={a.id}
-        onClick={() => {
-          dispatch(setCurrentPageAction(a.progress))
-          dispatch(
-            setCurrentArticleAction({
-              id: a.id,
-              name: a.name,
-              pageCount: a.pageCount,
-            })
-          )
-        }}
-      >
-        {a.name}
-      </button>
+      <ArticleButton article={a} active={a.id === currentArticleId} />
     )
   }
   return (
     <div className="sidePannel">
-      <h4>Your articles</h4>
+      <h4 className="yourArticles">Your articles</h4>
       {column}
     </div>
   )
