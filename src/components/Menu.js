@@ -1,4 +1,9 @@
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import './Menu.css'
+
 
 const Menu = () => {
   return (
@@ -13,12 +18,21 @@ const Menu = () => {
         <Link className="navLink" to={'testing'}>
           Testing
         </Link>
-        <Link className="navLink" to={'.'}>
+        <Link className="navLink" to={'account'}>
           Account
         </Link>
       </div>
+      <div className="navIcons">
+        <Link to={'settings'}>
+          <FontAwesomeIcon icon={faCog} className="navIcon" />
+        </Link>
+        <Link to={'.'} >
+          <FontAwesomeIcon icon={faSignOutAlt} className="navIcon" />
+        </Link>
+      </div>
     </nav>
-  )
-}
 
-export default Menu
+  );
+};
+
+export default Menu;

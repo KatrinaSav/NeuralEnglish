@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status
 from fastapi.responses import JSONResponse
-from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register
+from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register, db_get_settings, db_updateUserData
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from lexicalFunctions import get_meaning, get_normal_form, get_usage, parse_article
@@ -95,7 +95,7 @@ def login(name, password):
 
 
 @app.get("/register/{name}/{password}")
-def login(name, password):
+def register(name, password):
     userId = db_login(name, password)
     if userId == []:
         db_register(name, password)
@@ -104,4 +104,22 @@ def login(name, password):
     else:
         return {"userId": None}
 
+
+@app.get("/setting/{id}")
+def get_settings(id):
+    userName, userPass = db_get_settings(id)
+    return {"userName": userName, "userPass": userPass}
+
+
+class UserDataUpdate(BaseModel):
+    name: str
+    password: str 
+
+@app.post("/updateUserData/{user_id}")
+def update_user_data(user_id, data: UserDataUpdate):
+    user_name = data.name
+    user_pass = data.password
+    result = db_updateUserData(user_id, user_name, user_pass)
+    print("result", result)
+    return result
 

@@ -1,11 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { setUserId } from '../store/UserReducer.js';
-import { Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import './LoginModule.css'
-import { render } from '@testing-library/react';
-import { store } from '../store'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -50,9 +47,9 @@ const LoginModule = () => {
           <label className="formLabel"htmlFor="password">Password</label>
           <input className="formInput"value={pass} onChange={(e) => setPass(e.target.value)}type='password' placeholder='*********' id="password" name="password"/>
           <button className="formButton"type="submit">Log In</button>
-          <label style={{textAlign: 'center'}}>{incorrectInput}</label>
+          <label style={{textAlign: 'center',  fontFamily: 'Livvic'}}>{incorrectInput}</label>
         </form>
-        <Link style={{fontSize: '20px'}} className="navLink" to={'register'}>Don't have an account? Register here</Link>
+        <Link style={{fontSize: '20px'}} className="navLinkForm" to={'register'}>Don't have an account? Register here</Link>
       </section>
     )
   }

@@ -59,11 +59,35 @@ def db_login(name, password):
 
 
 def db_register(name, password):
-    print(name, password)
     connection, cursor = open_connection()
     cursor.execute(f'''INSERT INTO "User" ("Name", "Password") VALUES ('{name}', '{password}') ''')
     connection.commit()
     close_connection(connection, cursor)
 
 
+def db_get_settings(id):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "User"."Name", "User"."Password" FROM "User" WHERE "User"."Id" = {id}''')
+    result = cursor.fetchall()
+    print(result)
+    close_connection(connection, cursor)
+    return result[0][0], result[0][1]
+
+
+def db_updateUserData(user_id, user_name, user_pass):
+    print("rr", user_id, user_name, user_pass)
+    connection, cursor = open_connection()
+    success = False
+    try:
+        print("fff")
+        cursor.execute(f'''UPDATE "User" SET "Name" = '{user_name}', "Password" = '{user_pass}' WHERE "User"."Id" = {user_id}''')
+
+        connection.commit()
+
+        success = True
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+    return {"success": success}
 

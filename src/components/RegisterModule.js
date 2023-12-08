@@ -1,10 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { useState } from 'react'
-import { UserReducer } from '../store/UserReducer';
-import { Route, Routes } from 'react-router-dom';
-import { setActiveWordAction } from '../store/CurrentArticleReducer.js';
-import { setCurrentUserId } from '../store/UserReducer.js';
 import { Link } from 'react-router-dom'
+import './LoginModule.css'
 
 const RegisterModule = () => {
     const dispatch = useDispatch()
@@ -42,7 +39,7 @@ const RegisterModule = () => {
           <label className="formLabel"htmlFor="password">Password</label>
           <input className="formInput"value={pass} onChange={(e) => setPass(e.target.value)}type='password' placeholder='*********' id="password" name="password"/>
           <button className="formButton"type="submit">Register</button>
-          <label style={{textAlign: 'center'}}>{status}</label>
+          <label style={{textAlign: 'center',  fontFamily: 'Livvic'}}>{status}</label>
         </form>
         <Link style={{fontSize: '20px'}}className="navLink" to='..'>Already have an account? Login here</Link>
       </section>
