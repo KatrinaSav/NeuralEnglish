@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status
 from fastapi.responses import JSONResponse
-from db_request import db_get_articles, db_get_article, db_post_article
+from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from lexicalFunctions import get_meaning, get_normal_form, get_usage, parse_article
@@ -86,5 +86,22 @@ def user(account_id):
 @app.get("/testing")
 def reading():
     return {"message": "Testing"}
+
+
+@app.get("/login/{name}/{password}")
+def login(name, password):
+    userId = db_login(name, password)
+    return {"userId": userId[0][0]} if userId else {"userId": None}
+
+
+@app.get("/register/{name}/{password}")
+def login(name, password):
+    userId = db_login(name, password)
+    if userId == []:
+        db_register(name, password)
+        userId = db_login(name, password)
+        return {"userId": userId[0][0]}
+    else:
+        return {"userId": None}
 
 

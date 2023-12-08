@@ -3,7 +3,7 @@ import psycopg2
 
 
 def open_connection():
-    connection = psycopg2.connect(dbname="db_test", host="127.0.0.1", user="postgres", password="25072003")
+    connection = psycopg2.connect(dbname="NewEnglishApp", host="127.0.0.1", user="postgres", password="sTasiko1513")
     cursor = connection.cursor()
     return connection, cursor
 
@@ -48,6 +48,22 @@ def db_post_article(user_id, url, title, paragraphs):
 
 def update_progress(article_id, page):
     pass
+
+
+def db_login(name, password):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "User"."Id" FROM "User" WHERE "User"."Name" = '{name}' AND "User"."Password" = '{password}' ''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
+
+
+def db_register(name, password):
+    print(name, password)
+    connection, cursor = open_connection()
+    cursor.execute(f'''INSERT INTO "User" ("Name", "Password") VALUES ('{name}', '{password}') ''')
+    connection.commit()
+    close_connection(connection, cursor)
 
 
 

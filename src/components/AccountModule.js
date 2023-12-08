@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 const AccountModule = () => {
   const dispatch = useDispatch()
   const id = useSelector((state) => state.user.userId)
-  console.log(id)
+  
 
   console.log(id)
 
