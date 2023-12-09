@@ -1,0 +1,25 @@
+/* Ваш файл стилей */
+.square {
+    width: 15px;
+    height: 15px;
+    background-color: #ffe68e;
+    margin-right: 8px; /* Добавлено для разделения квадрата и текста */
+  }
+  
+  .activeSquare {
+    background-color: #ff5959;
+  }
+  
+  .articleSide {
+    display: flex;
+    align-items: center;
+    font-family: 'Livvic';
+    font-size: 14px;
+    color: #474747;
+    font-weight: 100;
+  }
+  
+  .articleSide:hover {
+    color: #ff5959;
+  }
+  

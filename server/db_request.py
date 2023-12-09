@@ -67,11 +67,11 @@ def db_register(name, password):
 
 def db_get_settings(id):
     connection, cursor = open_connection()
-    cursor.execute(f'''SELECT "User"."Name", "User"."Password" FROM "User" WHERE "User"."Id" = {id}''')
+    cursor.execute(f'''SELECT "User"."Name", "User"."Password", "User"."Rating" FROM "User" WHERE "User"."Id" = {id}''')
     result = cursor.fetchall()
     print(result)
     close_connection(connection, cursor)
-    return result[0][0], result[0][1]
+    return result[0][0], result[0][1], result[0][2]
 
 
 def db_updateUserData(user_id, user_name, user_pass):
@@ -91,3 +91,28 @@ def db_updateUserData(user_id, user_name, user_pass):
         close_connection(connection, cursor)
     return {"success": success}
 
+
+def db_get_collections(user):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "Collection"."Id", "Collection"."Name" FROM "Collection" WHERE "Collection"."Id_user" = {user}''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
+
+def db_add_collection(id, name):
+    connection, cursor = open_connection()
+    cursor.execute(f'''INSERT INTO "Collection" ("Name", "Id_user") VALUES ('{name}', {id}) ''')
+    connection.commit()
+    close_connection(connection, cursor)
+
+def db_delete_collection(id):
+    connection, cursor = open_connection()
+
+    try:
+        cursor.execute(f'''DELETE FROM "Collection" WHERE "Collection"."Id" = {id}''')
+
+        connection.commit()
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)

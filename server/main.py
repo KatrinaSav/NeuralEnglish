@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status
 from fastapi.responses import JSONResponse
-from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register, db_get_settings, db_updateUserData
+from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register, db_get_settings, db_updateUserData, db_get_collections, db_add_collection, db_delete_collection
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from lexicalFunctions import get_meaning, get_normal_form, get_usage, parse_article
@@ -107,8 +107,8 @@ def register(name, password):
 
 @app.get("/setting/{id}")
 def get_settings(id):
-    userName, userPass = db_get_settings(id)
-    return {"userName": userName, "userPass": userPass}
+    userName, userPass, userRating = db_get_settings(id)
+    return {"userName": userName, "userPass": userPass, "userRating": userRating}
 
 
 class UserDataUpdate(BaseModel):
@@ -123,3 +123,30 @@ def update_user_data(user_id, data: UserDataUpdate):
     print("result", result)
     return result
 
+
+@app.get("/collections/{userId}")
+def get_articles(userId):
+    list_from_db = db_get_collections(userId)
+    print(list_from_db)
+    result = []
+    for coll in list_from_db:
+        tmp = {"id": coll[0],
+               "name": coll[1]}
+        result.append(tmp)
+    return result
+
+
+class AddCollectionData(BaseModel):
+    name: str
+
+@app.post("/addCollection/{id}")
+def add_collection(id, data: AddCollectionData):
+    db_add_collection(id, data.name)
+    return {'ok': True}
+
+
+@app.post("/deleteCollection/{id}")
+def delete_collection(id):
+    print('delete')
+    db_delete_collection(id)
+    return {'ok': True}

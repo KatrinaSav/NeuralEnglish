@@ -8,6 +8,7 @@ const SettingsModule = () => {
 
   const [name, setName] = useState('');
   const [pass, setPass] = useState('');
+  const [rating, setRating] = useState('');
   const [status, setStatus] = useState('');
 
   useEffect(() => {
@@ -18,51 +19,61 @@ const SettingsModule = () => {
 
         setName(json.userName);
         setPass(json.userPass);
+        setRating(json.userRating);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-}, [id]); 
+  }, [id]); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name);
-    console.log(pass);
+    
     try {
-        // Отправляем данные на сервер для обновления
-        fetch(`http://localhost:8000/updateUserData/${id}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 'name':name, 'password':pass }),
-        }).then((response) => response.json())
-        .then((json) => {
-            console.log(json)
-    
-            if (json['success']) {
-    
-              setStatus('*Data updated successfully');
-            } else {
-              setStatus('*Failed to update data');
-            }
-          
-        })
-        
-        
-      } catch (error) {
-        console.error('*Error updating data:', error);
-        setStatus('*Error updating data');
+      // Отправляем данные на сервер для обновления
+      const response = await fetch(`http://localhost:8000/updateUserData/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'name': name, 'password': pass }),
+      });
+
+      const json = await response.json();
+
+      if (json['success']) {
+        setStatus('*Data updated successfully');
+      } else {
+        setStatus('*Failed to update data');
       }
+    } catch (error) {
+      console.error('*Error updating data:', error);
+      setStatus('*Error updating data');
+    }
+  };
 
-
+  const renderStars = () => {
+    const filledStars = Math.floor(rating); // Количество закрашенных звезд
+    const remainingStars = 5 - filledStars; // Количество незакрашенных звезд
+  
+    return (
+      <div className="ratingStars">
+        {[...Array(filledStars)].map((_, index) => (
+          <span key={index}>★</span>
+        ))}
+        {[...Array(remainingStars)].map((_, index) => (
+          <span key={index} className="empty">☆</span>
+        ))}
+      </div>
+    );
   };
 
   return (
     <section className="settingsForm">
       <h2 className="settingsTitleH2">Settings</h2>
+      <div className="ratingStars">{renderStars()}</div>
       <form className="settingsInputForm" onSubmit={handleSubmit}>
         <label className="settingsFormLabel" htmlFor="name">
           Name
@@ -71,7 +82,7 @@ const SettingsModule = () => {
           className="settingsFormInput"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          type="text" 
+          type="text"
           placeholder={name}
           id="name"
           name="name"
@@ -91,7 +102,7 @@ const SettingsModule = () => {
         <button className="settingsFormButton" type="submit">
           Change
         </button>
-        <label style={{ textAlign: 'center',  fontFamily: 'Livvic'}}>{status}</label>
+        <label style={{ textAlign: 'center', fontFamily: 'Livvic' }}>{status}</label>
       </form>
     </section>
   );

@@ -1,6 +1,6 @@
 .settingsForm {
     display: flex;
-    min-height: 100vh;
+    min-height: 94.6vh;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -53,3 +53,20 @@
     color: #474747;
     font-family: 'Livvic';
 }
+
+.ratingStars {
+    font-size: 24px; /* Размер шрифта для звезд */
+    margin-bottom: 10px; /* Отступ снизу */
+  }
+  
+  /* Стили для каждой звезды */
+  .ratingStars span {
+    display: inline-block;
+    color: gold; /* Цвет закрашенных звезд */
+    margin-right: 5px; /* Расстояние между звездами */
+  }
+  
+  /* Стили для незакрашенных звезд */
+  .ratingStars span.empty {
+    color: lightgray; /* Цвет незакрашенных звезд */
+  }

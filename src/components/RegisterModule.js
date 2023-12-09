@@ -41,7 +41,7 @@ const RegisterModule = () => {
           <button className="formButton"type="submit">Register</button>
           <label style={{textAlign: 'center',  fontFamily: 'Livvic'}}>{status}</label>
         </form>
-        <Link style={{fontSize: '20px'}}className="navLink" to='..'>Already have an account? Login here</Link>
+        <Link style={{fontSize: '20px'}}className="navLinkForm" to='..'>Already have an account? Login here</Link>
       </section>
     )
   }
