@@ -16,7 +16,7 @@
   }
   
   .addCollectionIcon:hover {
-    background-color: #ff5959; 
+    background-color: #ffe790; 
   }
 
 
@@ -46,6 +46,7 @@
     transition: background-color 0.3s;
     font-family: 'Livvic';
     margin-top: 10px;
+    width: 100px;
   }
   
   

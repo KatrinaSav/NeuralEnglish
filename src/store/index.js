@@ -6,6 +6,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { CurrentArticlesReducer } from './CurrentArticleReducer'
 import { WordInfoReducer } from './WordInfoReducer'
 import { CurrentCollectionReducer } from './CurrentCollectionReducer'
+import { CardsReducer } from './CardsReducer'
 
 const rootReducer = combineReducers({
   user: UserReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   wordInfo: WordInfoReducer,
   collections: CollectionReducer,
   currentCollection: CurrentCollectionReducer,
+  cards: CardsReducer,
 })
 const store = configureStore({ reducer: rootReducer })
 export { store }

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status
 from fastapi.responses import JSONResponse
-from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register, db_get_settings, db_updateUserData, db_get_collections, db_add_collection, db_delete_collection
+from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register, db_get_settings, db_updateUserData, db_get_collections, db_add_collection, db_delete_collection, db_get_cards, db_edit_collection, db_add_card, db_delete_card, db_edit_card
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from lexicalFunctions import get_meaning, get_normal_form, get_usage, parse_article
@@ -149,4 +149,48 @@ def add_collection(id, data: AddCollectionData):
 def delete_collection(id):
     print('delete')
     db_delete_collection(id)
+    return {'ok': True}
+
+@app.get("/cards/{collId}")
+def get_cards(collId):
+    print("get_cards")
+    list_from_db = db_get_cards(collId)
+    print(list_from_db)
+    result = []
+    for card in list_from_db:
+        tmp = {"id": card[0],
+               "name": card[1],
+               "def": card[2]}
+        result.append(tmp)
+    return result
+
+class EditCollectionData(BaseModel):
+    name: str
+
+@app.post("/editCollection/{id}")
+def edit_collection(id, data: EditCollectionData):
+    db_edit_collection(id, data.name)
+    return {'ok': True}
+
+class AddCardData(BaseModel):
+    word: str
+    definition: str
+
+@app.post("/addCard/{id}")
+def add_card(id, data: AddCardData):
+    db_add_card(id, data.word, data.definition)
+    return {'ok': True}
+
+@app.post("/deleteCard/{id}")
+def delete_card(id):
+    db_delete_card(id)
+    return {'ok': True}
+
+class EditCardData(BaseModel):
+    word: str
+    definition: str
+
+@app.post("/editCard/{id}")
+def edit_card(id, data: EditCardData):
+    db_edit_card(id, data.word, data.definition)
     return {'ok': True}

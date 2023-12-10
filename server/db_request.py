@@ -116,3 +116,60 @@ def db_delete_collection(id):
         connection.rollback()
     finally:
         close_connection(connection, cursor)
+
+
+def db_get_cards(collId):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "Card"."Id", "Card"."Word", "Card"."Definition" FROM "Card" WHERE "Card"."Id_collection" = {collId}''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
+
+
+def db_edit_collection(id, name):
+    connection, cursor = open_connection()
+    try:
+        print("fff")
+        cursor.execute(f'''UPDATE "Collection" SET "Name" = '{name}' WHERE "Collection"."Id" = {id}''')
+
+        connection.commit()
+
+        success = True
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+
+
+def db_add_card(id, word, definition):
+    connection, cursor = open_connection()
+    cursor.execute(f'''INSERT INTO "Card" ("Word", "Definition", "Id_collection") VALUES ('{word}', '{definition}', {id}) ''')
+    connection.commit()
+    close_connection(connection, cursor)
+
+def db_delete_card(id):
+    connection, cursor = open_connection()
+
+    try:
+        cursor.execute(f'''DELETE FROM "Card" WHERE "Card"."Id" = {id}''')
+
+        connection.commit()
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+
+
+def db_edit_card(id, word, definition):
+    connection, cursor = open_connection()
+    try:
+        print("fff")
+        cursor.execute(f'''UPDATE "Card" SET "Word" = '{word}', "Definition" = '{definition}' WHERE "Card"."Id" = {id}''')
+
+        connection.commit()
+
+        success = True
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)

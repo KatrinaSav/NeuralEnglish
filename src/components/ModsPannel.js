@@ -50,7 +50,7 @@ const ModsPanel = () => {
             onClick={() => handleModClick(modName)}
           >
             {modName}
-            <FontAwesomeIcon icon={faArrowRight} className="arrowIcon" />
+            <FontAwesomeIcon icon={faArrowRight} className="arrowIconMod" />
           </button>
         ))}
       </div>
