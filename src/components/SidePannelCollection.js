@@ -14,6 +14,7 @@ const SidePannelCollection = () => {
   const collections = useSelector((state) => state.collections.collections);
   const currentCollectionId = useSelector((state) => state.currentCollection.id);
   console.log("cuuuuur", currentCollectionId)
+  console.log("collections", collections)
 
   const [isAddingCollection, setIsAddingCollection] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');

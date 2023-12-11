@@ -5,9 +5,12 @@ import { faArrowRight, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import './ModsPannel.css'; 
 import { setCurrentCollectionAction } from '../store/CurrentCollectionReducer';
 import { getCollections } from '../store/CollectionReducer'
+import { useNavigate } from 'react-router-dom';
 
 const ModsPanel = () => {
     const dispatch = useDispatch()
+    let navigate = useNavigate();
+    const cards = useSelector((state) => state.cards.cards);
     const user = useSelector((state) => state.user.userId)
     const currentCollectionId = useSelector((state) => state.currentCollection.id);
 
@@ -16,7 +19,14 @@ const ModsPanel = () => {
 
   // Функция обработки клика по кнопке мода
   const handleModClick = (modName) => {
-    // Ваша логика обработки клика по кнопке мода
+    if (modName === 'Cards'){
+      if (currentCollectionId !== -1){
+        navigate('/cardMod');
+      }
+    }
+
+
+
     console.log(`Clicked on mod: ${modName}`);
   };
 
@@ -31,12 +41,15 @@ const ModsPanel = () => {
           },
           body: JSON.stringify({ id: currentCollectionId }),
         });
-        dispatch(setCurrentCollectionAction({'id': -1, 'name': ''}));
-        dispatch(getCollections(user))
+        dispatch(setCurrentCollectionAction(-1, ''));
+        
     console.log('Clicked on delete button');
+    navigate('/account');
 
     }
   };
+
+ 
 
   return (
     <div>
@@ -53,12 +66,11 @@ const ModsPanel = () => {
             <FontAwesomeIcon icon={faArrowRight} className="arrowIconMod" />
           </button>
         ))}
-      </div>
-      
+      </div>   
     </div>
             {/* Кнопка в виде иконки мусорки */}
       <button className="deleteButton" onClick={handleDeleteClick}>
-        <FontAwesomeIcon icon={faTrashAlt} />
+        <FontAwesomeIcon icon={faTrashAlt}  />
       </button>
     </div>
   );

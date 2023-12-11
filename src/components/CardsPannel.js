@@ -3,14 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faPlus, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Card from './Card'; 
 import './CardsPannel.css';
+import { getCards } from '../store/CardsReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCollections } from '../store/CollectionReducer'
-import { getCards } from '../store/CardsReducer';
+import { useEffect } from 'react';
 
 
-const CardsPannel = ({ collectionName, cards }) => {
+
+const CardsPannel = ({ collectionName}) => {
     const currentCollectionId = useSelector((state) => state.currentCollection.id);
+    const currentCollectionName = useSelector((state) => state.currentCollection.name);
     const user = useSelector((state) => state.user.userId)
+    const cards = useSelector((state) => state.cards.cards);
     const [startIndex, setStartIndex] = useState(0);
     const [isEditing, setIsEditing] = useState(false);
     const [newCollectionName, setNewCollectionName] = useState('');
@@ -21,8 +25,14 @@ const CardsPannel = ({ collectionName, cards }) => {
   });
 
     const visibleCards = cards.slice(startIndex, startIndex + 2);
-  console.log('visibleCards',visibleCards)
+    console.log('visibleCards',visibleCards)
+
+    
     const dispatch = useDispatch();
+
+    useEffect(() => {
+    dispatch(getCards(currentCollectionId));
+  }, [currentCollectionId, currentCollectionName, dispatch]);
 
 
     const handleArrowClick = (direction) => {

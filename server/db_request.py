@@ -173,3 +173,7 @@ def db_edit_card(id, word, definition):
         connection.rollback()
     finally:
         close_connection(connection, cursor)
+
+
+def db_get_remember_data(id, status):
+    pass

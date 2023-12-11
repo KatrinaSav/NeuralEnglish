@@ -5,7 +5,7 @@ const GET_CARDS = 'GET_CARDS'
 export const CardsReducer = (state = initialState, action) => {
     switch (action.type) {
       case GET_CARDS:
-          
+          if (action.collId !== -1) {
           let cards = []
           let request = new XMLHttpRequest()
           request.open(
@@ -22,7 +22,10 @@ export const CardsReducer = (state = initialState, action) => {
             }
           }
           console.log("cards", cards)
-        return { ...state, cards: cards };
+        return { ...state, cards: cards };}
+        else {
+          return { ...state, cards: [] };
+        }
       default:
         return state;
     }

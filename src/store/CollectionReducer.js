@@ -23,8 +23,6 @@ export const CollectionReducer = (state = initialState, action) => {
             coll.push(arrayOfCollections[collection])
           }
         }
-        console.log("coll", coll)
-        console.log(coll[0]['id'], coll[0]['name'])
       return { ...state, collections: coll };
     default:
       return state;

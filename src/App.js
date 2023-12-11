@@ -4,12 +4,14 @@ import AccountModule from './components/AccountModule'
 import ReadingModule from './components/ReadingModule'
 import LoginModule from './components/LoginModule'
 import RegisterModule from './components/RegisterModule'
+import CardMod from './components/CardMod'
 import SettingsModule from './components/SettingsModule'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import DefaultLayout from './components/DefaultLayout'
 import { useEffect } from 'react'
 import { addArticleAction } from './store/ArticlesReducer'
+
 
 function App() {
   // articles.forEach((element) => {
@@ -24,6 +26,7 @@ function App() {
         <Route path="reading" element={<ReadingModule />}></Route>
         <Route path="testing" element={<TestingModule />}></Route>
         <Route path="settings" element={<SettingsModule />}></Route>
+        <Route path="cardMod" element={<CardMod />}></Route>
       </Route>
     </Routes>
   )
