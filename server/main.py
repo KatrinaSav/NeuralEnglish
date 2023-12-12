@@ -1,10 +1,15 @@
 from fastapi import FastAPI, Response, status
 from fastapi.responses import JSONResponse
-from db_request import db_get_articles, db_get_article
+from db_request import db_get_articles, db_get_article, db_post_article
 from fastapi.middleware.cors import CORSMiddleware
+<<<<<<< HEAD
 
 from lexicalFunctions import get_meaning, get_normal_form, get_usage
 from test import create_test
+=======
+from pydantic import BaseModel
+from lexicalFunctions import get_meaning, get_normal_form, get_usage, parse_article
+>>>>>>> master
 
 app = FastAPI()
 origins = [
@@ -22,6 +27,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # разбить по файлам
+class Article_data(BaseModel):
+    title: str
+    url: str
 
 @app.get("/articles/{account_id}")
 def get_articles(account_id):
@@ -75,9 +83,10 @@ def get_article(account_id, article_id):
     return {"message": "article"}
 
 
-@app.post("/articles/{account_id}", status_code=200)
-def post_article(response: Response, account_id, article_id):
-    return {"message": "article"}
+@app.post("/article/{account_id}", status_code=200)
+def post_article(request: Article_data, account_id):
+    paragraphs = parse_article(request.url)
+    return db_post_article(account_id,request.url,request.title,paragraphs)
 
 
 @app.get("/account/{account_id}")
