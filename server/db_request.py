@@ -177,3 +177,10 @@ def db_edit_card(id, word, definition):
 
 def db_get_remember_data(id, status):
     pass
+
+def db_get_article_page_count(id):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "Article"."Page_count" FROM "Article" WHERE "Article"."Id"={id}''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
