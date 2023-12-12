@@ -2,14 +2,11 @@ from fastapi import FastAPI, Response, status
 from fastapi.responses import JSONResponse
 from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register, db_get_settings, db_updateUserData, db_get_collections, db_add_collection, db_delete_collection, db_get_cards, db_edit_collection, db_add_card, db_delete_card, db_edit_card, db_get_remember_data
 from fastapi.middleware.cors import CORSMiddleware
-<<<<<<< HEAD
 
 from lexicalFunctions import get_meaning, get_normal_form, get_usage
 from test import create_test
-=======
 from pydantic import BaseModel
 from lexicalFunctions import get_meaning, get_normal_form, get_usage, parse_article
->>>>>>> master
 
 app = FastAPI()
 origins = [
