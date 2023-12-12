@@ -1,0 +1,102 @@
+.card {
+    position: relative;
+    border: 1px solid #ffe790;
+    border-radius: 10px; /* Закругление углов */
+    padding: 16px;
+    margin: 16px;
+    width: 350px; /* Задайте нужную ширину */
+    height: 500px; /* Задайте нужную высоту */
+    background-color: #fff9e2; /* Цвет заливки */
+  }
+
+  .cardName {
+    margin: 0;
+    font-size: 50px;
+  }
+
+  .def {
+    margin-top: 20px;
+    font-size: 30px;
+  }
+  
+  .topRightIcons {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    font-size: 25px;
+  }
+  
+  .editIcon,
+  .deleteIcon {
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  
+  .content {
+    margin-top: 100px;
+    text-align: center;
+    font-family: 'Livvic';
+    flex: 1; /* Занимает оставшееся пространство */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .bottomCenterIcons {
+    text-align: center;
+    margin-top: 16px;
+  }
+  
+  .speakerIcon {
+    margin-top: 8px;
+    cursor: pointer;
+    font-size: 25px;
+  }
+
+
+  
+
+
+  .editCardForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 300px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto; /* Центрируем по горизонтали */
+  }
+
+  .editCardForm label {
+    font-family: 'Livvic';
+    font-size: 25px;
+  }
+
+  .editCardForm input {
+    height: 40px;
+    font-family: 'Livvic';
+    font-size: 20px;
+  }
+
+  .editCardForm textarea {
+    height: 40px;
+    font-family: 'Livvic';
+    font-size: 20px;
+  }
+
+  .editCardForm button {
+    padding: 10px 20px; 
+    font-size: 20px;
+    background-color: #ff5959;
+    color: #474747;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Livvic';
+    width: 100px;
+  }
+
+  .editCardForm button:hover {
+    background-color: #ffe790; 
+  }

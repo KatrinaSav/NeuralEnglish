@@ -1,0 +1,109 @@
+.cardForCardMod {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 1000px;
+}
+
+.contentCardMod {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #ffe790;
+    border-radius: 10px; /* Закругление углов */
+    padding: 16px;
+    margin: 16px;
+    width: 350px; /* Задайте нужную ширину */
+    height: 500px; /* Задайте нужную высоту */
+    background-color: #fff9e2; /* Цвет заливки */
+
+  }
+
+
+  .cardNameMod {
+    margin-bottom: 50px;
+    font-size: 50px;
+    font-family: 'Livvic';
+    color: #474747;
+  }
+
+  .cardDef {
+    margin-bottom: 50px;
+    margin-top: 20px;
+    font-size: 30px;
+    font-family: 'Livvic';
+    color: #474747;
+  }
+
+  .arrowIconCard {
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 8px;
+    padding: 8px;
+    width: 35px;
+    height: 35px; 
+    border: 1px solid #474747;
+    border-radius: 50%;
+    text-align: center;
+    color: #474747;
+    background-color: #fff9e2;
+    transition: background-color 0.3s ease; 
+    margin: 0 auto; 
+    display: block;
+  }
+  
+  .arrowIconCard:hover {
+    background-color: #ffe790; 
+  }
+
+  .rememberButton {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+  }
+
+  .learning {
+    padding: 10px 20px; 
+    font-size: 20px;
+    background-color: #ff5959;
+    color: #474747;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Livvic';
+    margin-top: 10px;
+    width: 150px;
+    border-radius: 10px;
+  }
+
+  .learning:hover {
+    background-color: #ffe790; 
+  }
+
+  .know {
+    padding: 10px 20px; 
+    font-size: 20px;
+    background-color: #67ff59;
+    color: #474747;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Livvic';
+    margin-top: 10px;
+    width: 150px;
+    border-radius: 10px;
+  }
+
+  .know:hover {
+    background-color: #ffe790; 
+  }
+
+  .doneMessage {
+    color: #474747;
+    font-size: 70px;
+  }
+

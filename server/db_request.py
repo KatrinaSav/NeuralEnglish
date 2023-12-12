@@ -3,7 +3,7 @@ import psycopg2
 
 
 def open_connection():
-    connection = psycopg2.connect(dbname="db_test", host="127.0.0.1", user="postgres", password="25072003")
+    connection = psycopg2.connect(dbname="NewEnglishApp", host="127.0.0.1", user="postgres", password="sTasiko1513")
     cursor = connection.cursor()
     return connection, cursor
 
@@ -50,4 +50,130 @@ def update_progress(article_id, page):
     pass
 
 
+def db_login(name, password):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "User"."Id" FROM "User" WHERE "User"."Name" = '{name}' AND "User"."Password" = '{password}' ''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
 
+
+def db_register(name, password):
+    connection, cursor = open_connection()
+    cursor.execute(f'''INSERT INTO "User" ("Name", "Password") VALUES ('{name}', '{password}') ''')
+    connection.commit()
+    close_connection(connection, cursor)
+
+
+def db_get_settings(id):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "User"."Name", "User"."Password", "User"."Rating" FROM "User" WHERE "User"."Id" = {id}''')
+    result = cursor.fetchall()
+    print(result)
+    close_connection(connection, cursor)
+    return result[0][0], result[0][1], result[0][2]
+
+
+def db_updateUserData(user_id, user_name, user_pass):
+    print("rr", user_id, user_name, user_pass)
+    connection, cursor = open_connection()
+    success = False
+    try:
+        print("fff")
+        cursor.execute(f'''UPDATE "User" SET "Name" = '{user_name}', "Password" = '{user_pass}' WHERE "User"."Id" = {user_id}''')
+
+        connection.commit()
+
+        success = True
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+    return {"success": success}
+
+
+def db_get_collections(user):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "Collection"."Id", "Collection"."Name" FROM "Collection" WHERE "Collection"."Id_user" = {user}''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
+
+def db_add_collection(id, name):
+    connection, cursor = open_connection()
+    cursor.execute(f'''INSERT INTO "Collection" ("Name", "Id_user") VALUES ('{name}', {id}) ''')
+    connection.commit()
+    close_connection(connection, cursor)
+
+def db_delete_collection(id):
+    connection, cursor = open_connection()
+
+    try:
+        cursor.execute(f'''DELETE FROM "Collection" WHERE "Collection"."Id" = {id}''')
+
+        connection.commit()
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+
+
+def db_get_cards(collId):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "Card"."Id", "Card"."Word", "Card"."Definition" FROM "Card" WHERE "Card"."Id_collection" = {collId}''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result
+
+
+def db_edit_collection(id, name):
+    connection, cursor = open_connection()
+    try:
+        print("fff")
+        cursor.execute(f'''UPDATE "Collection" SET "Name" = '{name}' WHERE "Collection"."Id" = {id}''')
+
+        connection.commit()
+
+        success = True
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+
+
+def db_add_card(id, word, definition):
+    connection, cursor = open_connection()
+    cursor.execute(f'''INSERT INTO "Card" ("Word", "Definition", "Id_collection") VALUES ('{word}', '{definition}', {id}) ''')
+    connection.commit()
+    close_connection(connection, cursor)
+
+def db_delete_card(id):
+    connection, cursor = open_connection()
+
+    try:
+        cursor.execute(f'''DELETE FROM "Card" WHERE "Card"."Id" = {id}''')
+
+        connection.commit()
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+
+
+def db_edit_card(id, word, definition):
+    connection, cursor = open_connection()
+    try:
+        print("fff")
+        cursor.execute(f'''UPDATE "Card" SET "Word" = '{word}', "Definition" = '{definition}' WHERE "Card"."Id" = {id}''')
+
+        connection.commit()
+
+        success = True
+    except Exception as e:
+        connection.rollback()
+    finally:
+        close_connection(connection, cursor)
+
+
+def db_get_remember_data(id, status):
+    pass

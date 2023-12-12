@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status
 from fastapi.responses import JSONResponse
-from db_request import db_get_articles, db_get_article, db_post_article
+from db_request import db_get_articles, db_get_article, db_post_article, db_login, db_register, db_get_settings, db_updateUserData, db_get_collections, db_add_collection, db_delete_collection, db_get_cards, db_edit_collection, db_add_card, db_delete_card, db_edit_card, db_get_remember_data
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from lexicalFunctions import get_meaning, get_normal_form, get_usage, parse_article
@@ -88,3 +88,118 @@ def reading():
     return {"message": "Testing"}
 
 
+@app.get("/login/{name}/{password}")
+def login(name, password):
+    userId = db_login(name, password)
+    return {"userId": userId[0][0]} if userId else {"userId": None}
+
+
+@app.get("/register/{name}/{password}")
+def register(name, password):
+    userId = db_login(name, password)
+    if userId == []:
+        db_register(name, password)
+        userId = db_login(name, password)
+        return {"userId": userId[0][0]}
+    else:
+        return {"userId": None}
+
+
+@app.get("/setting/{id}")
+def get_settings(id):
+    userName, userPass, userRating = db_get_settings(id)
+    return {"userName": userName, "userPass": userPass, "userRating": userRating}
+
+
+class UserDataUpdate(BaseModel):
+    name: str
+    password: str 
+
+@app.post("/updateUserData/{user_id}")
+def update_user_data(user_id, data: UserDataUpdate):
+    user_name = data.name
+    user_pass = data.password
+    result = db_updateUserData(user_id, user_name, user_pass)
+    print("result", result)
+    return result
+
+
+@app.get("/collections/{userId}")
+def get_articles(userId):
+    list_from_db = db_get_collections(userId)
+    print(list_from_db)
+    result = []
+    for coll in list_from_db:
+        tmp = {"id": coll[0],
+               "name": coll[1]}
+        result.append(tmp)
+    return result
+
+
+class AddCollectionData(BaseModel):
+    name: str
+
+@app.post("/addCollection/{id}")
+def add_collection(id, data: AddCollectionData):
+    db_add_collection(id, data.name)
+    return {'ok': True}
+
+
+@app.post("/deleteCollection/{id}")
+def delete_collection(id):
+    print('delete')
+    db_delete_collection(id)
+    return {'ok': True}
+
+@app.get("/cards/{collId}")
+def get_cards(collId):
+    print("get_cards")
+    list_from_db = db_get_cards(collId)
+    print(list_from_db)
+    result = []
+    for card in list_from_db:
+        tmp = {"id": card[0],
+               "name": card[1],
+               "def": card[2]}
+        result.append(tmp)
+    return result
+
+class EditCollectionData(BaseModel):
+    name: str
+
+@app.post("/editCollection/{id}")
+def edit_collection(id, data: EditCollectionData):
+    db_edit_collection(id, data.name)
+    return {'ok': True}
+
+class AddCardData(BaseModel):
+    word: str
+    definition: str
+
+@app.post("/addCard/{id}")
+def add_card(id, data: AddCardData):
+    db_add_card(id, data.word, data.definition)
+    return {'ok': True}
+
+@app.post("/deleteCard/{id}")
+def delete_card(id):
+    db_delete_card(id)
+    return {'ok': True}
+
+class EditCardData(BaseModel):
+    word: str
+    definition: str
+
+@app.post("/editCard/{id}")
+def edit_card(id, data: EditCardData):
+    db_edit_card(id, data.word, data.definition)
+    return {'ok': True}
+
+class RememberData(BaseModel):
+    status: str
+    
+
+@app.post("/sendRememberData/{id}")
+def get_remember_data(id, data: RememberData):
+    db_get_remember_data(id, data.status)
+    return {'ok': True}

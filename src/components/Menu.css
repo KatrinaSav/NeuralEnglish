@@ -1,0 +1,40 @@
+/* Общие стили для навигации */
+.navigationDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .mainLabel {
+    font-size: 1.5em;
+  }
+  
+  /* Стили для панели навигации */
+  .navPanel {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navLink {
+    color: #474747;
+    text-decoration: none;
+    font-size: 1.6em;
+  }
+  
+  /* Стили для иконок */
+  .navIcons {
+    font-size: 1.2em;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .navIcon {
+    color: #474747;
+    font-size: 1.2em;
+  }
+
+  .navIcon:hover {
+    color: rgb(255, 255, 255); /* цвет при наведении мыши */
+  }
+  
