@@ -3,7 +3,7 @@ import psycopg2
 
 
 def open_connection():
-    connection = psycopg2.connect(dbname="NewEnglishApp", host="127.0.0.1", user="postgres", password="sTasiko1513")
+    connection = psycopg2.connect(dbname="db_test", host="127.0.0.1", user="postgres", password="25072003")
     cursor = connection.cursor()
     return connection, cursor
 
@@ -94,7 +94,7 @@ def db_updateUserData(user_id, user_name, user_pass):
 
 def db_get_collections(user):
     connection, cursor = open_connection()
-    cursor.execute(f'''SELECT "Collection"."Id", "Collection"."Name" FROM "Collection" WHERE "Collection"."Id_user" = {user}''')
+    cursor.execute(f'''SELECT "Collection"."Id", "Collection"."Name " FROM "Collection" WHERE "Collection"."Id_user" = {user}''')
     result = cursor.fetchall()
     close_connection(connection, cursor)
     return result

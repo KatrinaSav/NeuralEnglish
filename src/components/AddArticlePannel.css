@@ -1,0 +1,28 @@
+.inputArticle {
+    border-color: #474747;
+    border-radius: 2px;
+    max-width: 130px;
+    min-height: 33px;
+    padding-left: 5px;
+    border-width: 0.5px;
+}
+
+.AddArticlePannel {
+    margin-bottom: 15px;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.addArticleButton {
+    background-color: #ff5959;
+    font-family: 'Livvic';
+    font-size: 15px;
+    color: #474747;
+    font-weight: 100;
+    border: none;
+    min-height: 35px;
+    min-width: 70px;
+}

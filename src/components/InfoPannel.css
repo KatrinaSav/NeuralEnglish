@@ -1,31 +1,57 @@
 .infoPannel {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .chooseInfo {
-  display: flex;
-  justify-content: stretch;
+    display: flex;
+    justify-content: stretch;
 }
 .wordInfoBtn {
-  min-height: 30px;
-  background-color: #ffe68e;
-  border: none;
-  flex-grow: 1;
+    min-height: 30px;
+    background-color: #ffe68e;
+    border: none;
+    flex-grow: 1;
 }
 .activeWordInfoBtn {
-  min-height: 30px;
-  background-color: #fff9e2;
-  border: none;
-  flex-grow: 1;
+    min-height: 30px;
+    background-color: #fff9e2;
+    border: none;
+    flex-grow: 1;
 }
 .infoContent {
-  background-color: #fff9e2;
-  min-height: 400px;
+    background-color: #fff9e2;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+    padding-right: 5px;
 }
 
 .infoContent h4,
 h5,
 h6,
 p {
-  margin: 0px;
+    margin: 0px;
+}
+.partOfSpeech {
+    font-family: 'Livvic';
+    font-size: 15px;
+    color: #474747;
+    font-weight: 400;
+    margin-left: 7px;
+}
+
+.currentWordInfo {
+    font-family: 'Livvic';
+    font-size: 20px;
+    color: #474747;
+    font-weight: 400;
+    align-self: center;
+}
+
+.wordInfoLine {
+    font-family: 'Livvic';
+    font-size: 15px;
+    color: #474747;
+    font-weight: 100;
 }
