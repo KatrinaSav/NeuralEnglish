@@ -1,14 +1,16 @@
-const initialState = { userId: 1 }
-const LOGIN = 'LOGIN'
+const initialState = { userId: -1 }
+const SET_USER_ID = 'SET_USER_ID'
+
 export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
-      return { ...state, userId: action.id }
-    case 'GET':
-      return { ...state }
+    case SET_USER_ID:
+      return { ...state, userId: action.userId }
     default:
       return state
   }
 }
 
-export const loginUserAction = (id) => ({ type: LOGIN, id })
+export const setUserId = (userId) => ({
+  type: SET_USER_ID, 
+  userId,
+})

@@ -7,6 +7,7 @@ import {
   setCurrentPageAction,
   setCurrentTextAction,
 } from '../store/CurrentArticleReducer'
+import { updateArticleProgressAction } from '../store/ArticlesReducer'
 
 const ArticleField = () => {
   const dispatch = useDispatch()
@@ -19,17 +20,6 @@ const ArticleField = () => {
   const activeWord = useSelector((state) => state.currentArticle.activeWord)
   const articleName = useSelector((state) => state.currentArticle.article.name)
 
-  useEffect(() => {
-    fetch(`http://localhost:8000/article/${articleId}/${page}`)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(articleId, page)
-        console.log(json)
-        dispatch(setCurrentTextAction(json['0'].text))
-      })
-      .catch(console.log('Kek'))
-  }, [articleId, page])
-
   let words = text.split(' ')
   let textToview = words.map((element, index) => {
     let style = 'word'
@@ -41,24 +31,32 @@ const ArticleField = () => {
     <div className="articleField">
       <h3 className="articleName">{articleName}</h3>
       <div className="textField">{articlePageCount ? textToview : 'HeLLO'}</div>
-      <button
-        disabled={articlePageCount && page !== 1 ? false : true}
-        className="pageBtn"
-        onClick={() => {
-          dispatch(setCurrentPageAction(page - 1))
-        }}
-      >
-        Previous
-      </button>
-      <button
-        disabled={articlePageCount && page !== articlePageCount ? false : true}
-        className="pageBtn"
-        onClick={() => {
-          dispatch(setCurrentPageAction(page + 1))
-        }}
-      >
-        Next
-      </button>
+      <div className="pageButtons">
+        <button
+          disabled={articlePageCount && page !== 1 ? false : true}
+          className="pageBtn"
+          onClick={() => {
+            const newPage = page - 1
+            dispatch(setCurrentPageAction(newPage))
+            dispatch(updateArticleProgressAction(newPage, articleId))
+          }}
+        >
+          Previous
+        </button>
+        <button
+          disabled={
+            articlePageCount && page !== articlePageCount ? false : true
+          }
+          className="pageBtn"
+          onClick={() => {
+            const newPage = page + 1
+            dispatch(setCurrentPageAction(newPage))
+            dispatch(updateArticleProgressAction(newPage, articleId))
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   )
 }

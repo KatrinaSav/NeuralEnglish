@@ -1,5 +1,5 @@
 const initialState = {
-  article: { id: 1 },
+  article: { id: 0 },
   page: 1,
   text: '',
   activeWord: -1,
@@ -12,8 +12,23 @@ export const CurrentArticlesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ARTICLE:
       return { ...state, article: action.article }
-    case SET_PAGE:
-      return { ...state, page: action.page }
+    case SET_PAGE: {
+      let test
+      let request = new XMLHttpRequest()
+      request.open(
+        'GET',
+        `http://localhost:8000/article/${state.article.id}/${action.page}`,
+        false
+      ) // `false` makes the request synchronous
+      request.send(null)
+
+      if (request.status === 200) {
+        const json = JSON.parse(request.responseText)
+        test = json['0'].text
+      }
+      return { ...state, page: action.page, text: test }
+    }
+
     case SET_TEXT:
       return { ...state, text: action.text }
     case SET_ACTIVE_WORD:

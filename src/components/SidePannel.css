@@ -1,8 +1,14 @@
-.articleBtn {
-  border: none;
-  display: block;
-  background-color: #fff9e2;
+.sidePannel {
+  display: flex;
+  flex-direction: column;
 }
 
-.sidePannel {
+.yourArticles {
+  font-family: 'Livvic';
+  font-size: 24px;
+  color: #474747;
+  font-weight: 100;
+  margin-top: 10px;
+  margin-bottom: 14px;
+  align-self: center;
 }

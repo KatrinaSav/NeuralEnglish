@@ -1,0 +1,56 @@
+.addCollectionIcon {
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 8px;
+    padding: 8px;
+    width: 35px;
+    height: 35px; 
+    border: 1px solid #474747;
+    border-radius: 50%;
+    text-align: center;
+    color: #474747;
+    background-color: #fff9e2;
+    transition: background-color 0.3s ease; 
+    margin: 0 auto; 
+    display: block;
+  }
+  
+  .addCollectionIcon:hover {
+    background-color: #ffe790; 
+  }
+
+
+.add-collection-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .add-collection-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #474747;
+    margin-bottom: 10px;
+    width: 250px;
+    font-family: 'Livvic'
+  }
+  
+  .add-collection-form button {
+    padding: 10px 20px; 
+    font-size: 20px;
+    background-color: #ff5959;
+    color: #474747;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Livvic';
+    margin-top: 10px;
+    width: 100px;
+  }
+  
+  
+  .add-collection-form button:hover {
+    background-color: #ffe790; 
+  }
+  

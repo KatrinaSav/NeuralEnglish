@@ -32,9 +32,9 @@ const InfoPannel = () => {
             .then((json) => {
               let answer = []
               for (let key in json) {
-                answer.push(<h6>{key}</h6>)
+                answer.push(<h6 className="partOfSpeech">{key}</h6>)
                 for (let def in json[key]) {
-                  answer.push(<p>{json[key][def]}</p>)
+                  answer.push(<p className="wordInfoLine">{json[key][def]}</p>)
                 }
               }
               setInfoContent(answer)
@@ -64,7 +64,7 @@ const InfoPannel = () => {
   }, [word, currentFunction])
 
   return (
-    <div>
+    <div className="infoPannel">
       <div className="chooseInfo">{infoButtons}</div>
       <div className="infoContent">
         <h4>{word}</h4>
