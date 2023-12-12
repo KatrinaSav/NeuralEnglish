@@ -4,6 +4,7 @@ from db_request import db_get_articles, db_get_article
 from fastapi.middleware.cors import CORSMiddleware
 
 from lexicalFunctions import get_meaning, get_normal_form, get_usage
+from test import create_test
 
 app = FastAPI()
 origins = [
@@ -84,8 +85,9 @@ def user(account_id):
     return {"message": "Account"}
 
 
-@app.get("/testing")
-def reading():
-    return {"message": "Testing"}
+@app.get("/testing/{article_id}")
+def reading(article_id):
+    # print()
+    return create_test(article_id)
 
 

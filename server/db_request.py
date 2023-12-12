@@ -3,7 +3,7 @@ import psycopg2
 
 
 def open_connection():
-    connection = psycopg2.connect(dbname="db_test", host="127.0.0.1", user="postgres", password="25072003")
+    connection = psycopg2.connect(dbname="db_test", host="127.0.0.1", user="postgres", password="123456789")
     cursor = connection.cursor()
     return connection, cursor
 
@@ -30,4 +30,9 @@ WHERE "Article"."Id" = {id} AND "ArticleContent"."Page_number" ={page}''')
     return result
 
 
-
+def db_get_article_page_count(id):
+    connection, cursor = open_connection()
+    cursor.execute(f'''SELECT "Article"."Page_count" FROM "Article" WHERE "Article"."Id"={id}''')
+    result = cursor.fetchall()
+    close_connection(connection, cursor)
+    return result

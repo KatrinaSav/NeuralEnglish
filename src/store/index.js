@@ -4,12 +4,15 @@ import { ArticlesReducer } from './ArticlesReducer'
 import { configureStore } from '@reduxjs/toolkit'
 import { CurrentArticlesReducer } from './CurrentArticleReducer'
 import { WordInfoReducer } from './WordInfoReducer'
+import { CurrentQuestionArticleReducer } from './CurrentQuestionArticleReducer' 
+
 
 const rootReducer = combineReducers({
   user: UserReducer,
   articles: ArticlesReducer,
   currentArticle: CurrentArticlesReducer,
   wordInfo: WordInfoReducer,
+  questionArticle: CurrentQuestionArticleReducer,
 })
 const store = configureStore({ reducer: rootReducer })
 export { store }
