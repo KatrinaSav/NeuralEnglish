@@ -4,6 +4,7 @@ from pyinflect import getInflection
 import re
 from pydantic import BaseModel
 from typing import Union
+import random
 
 from db_request import db_get_article_page_count, db_get_article
 
@@ -70,6 +71,7 @@ def create_question(text):
             new_doc_processed = nlp.get_pipe("tagger")(new_doc)
             result.text = new_doc_processed.text
             create_options(verb, token, result)
+            random.shuffle(result.questions)
             return result
     return result
 
