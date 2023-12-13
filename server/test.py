@@ -18,7 +18,9 @@ def create_test(id):
     # result = Question()
     result = []
     page_count = db_get_article_page_count(id)
-    print(page_count[0][0])
+    print(page_count)
+    if not page_count:
+        return []
     if page_count[0][0] > 11:
         page_count = 11
     else:
@@ -28,18 +30,13 @@ def create_test(id):
         sentences = re.split(r'[.]{1,3}|[!?]', text)
         sentence_num = 0
         question = create_question(sentences[sentence_num])
-        while not question:
-            try:
-                sentence_num = sentence_num + 1
-                question = create_question(sentences[sentence_num])
-            except:
-                return []
+        print(question)
         while not question.questions:
                 try:
                     sentence_num = sentence_num + 1
                     question = create_question(sentences[sentence_num])
                 except:
-                    return []
+                    break
         result.append(question)
     # print(result)
     return result
@@ -58,7 +55,7 @@ def create_question(text):
     verb = ''
     result = Question()
     for token in doc:
-        if verb != '':
+        if (verb != ''):
             break
         if "VERB" in token.pos_:
             index_to_delete = [token.i]
@@ -74,6 +71,7 @@ def create_question(text):
             result.text = new_doc_processed.text
             create_options(verb, token, result)
             return result
+    return result
 
 
 def create_options(word, token, result: Question):
@@ -98,73 +96,73 @@ def create_options(word, token, result: Question):
             for answer in create_future_forms(token.lemma_, 'FS'):
                 result.questions.append(answer)
         elif re.search(present_tense_pattern, word):
-            result.answer = word.strip().strip()
-            result.questions.append(word)
+            result.answer = word.strip()
+            result.questions.append(word.strip())
             for answer in create_present_forms(token.lemma_, 'PRS', define_pov(word, token)):
                 result.questions.append(answer)
 
     elif token.tag_ == 'VBD':
         result.answer = word.strip()
-        result.questions.append(word)
+        result.questions.append(word.strip())
         for answer in create_past_forms(token.lemma_, 'PAS'):
             result.questions.append(answer)
 
     elif token.tag_ == 'VBG':
         if re.search(present_continuous_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_present_forms(token.lemma_, 'PRC', define_pov(word, token)):
                 result.questions.append(answer)
         elif re.search(past_continuous_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_past_forms(token.lemma_, 'PAC', define_pov(word, token)):
                 result.questions.append(answer)
         elif re.search(future_continuous_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_future_forms(token.lemma_, 'FC'):
                 result.questions.append(answer)
         elif re.search(present_perfect_continuous_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_present_forms(token.lemma_, 'PRPC', define_pov(word, token)):
                 result.questions.append(answer)
         elif re.search(past_perfect_continuous_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_past_forms(token.lemma_, 'PAPC'):
                 result.questions.append(answer)
         elif re.search(future_perfect_continuous_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_future_forms(token.lemma_, 'FPC'):
                 result.questions.append(answer)
 
     elif token.tag_ == 'VBN':
         if re.search(future_perfect_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_future_forms(token.lemma_, 'FP'):
                 result.questions.append(answer)
         elif re.search(past_perfect_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_past_forms(token.lemma_, 'PAP'):
                 result.questions.append(answer)
         elif re.search(present_perfect_pattern, word):
             result.answer = word.strip()
-            result.questions.append(word)
+            result.questions.append(word.strip())
             for answer in create_present_forms(token.lemma_, 'PRP', define_pov(word, token)):
                 result.questions.append(answer)
     elif token.tag_ == 'VBP':
         result.answer = word.strip()
-        result.questions.append(word)
+        result.questions.append(word.strip())
         for answer in create_present_forms(token.lemma_, 'PRS', define_pov(word, token)):
             result.questions.append(answer)
     elif token.tag_ == 'VBZ':
         result.answer = word.strip()
-        result.questions.append(word)
+        result.questions.append(word.strip())
         for answer in create_present_forms(token.lemma_, 'PRS', define_pov(word, token)):
             result.questions.append(answer)
     return result

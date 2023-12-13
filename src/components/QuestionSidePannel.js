@@ -1,36 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './QuestionSidePannel.css'
-import {
-    setCurrentQuestionArticleAction,
-    setCurrentQuestionAction,
-    setCurrentAnswersAction,
-    setCurrentQuestionsAction,
-    setCurrentQuestionNameAction,
-  } from '../store/CurrentQuestionArticleReducer'
-  import { getArticleAction } from '../store/ArticlesReducer'
+import SideQuestionButton from './SideQuestionButton'
 
 const QuestionSidePannel = () => {
-
-    const dispatch = useDispatch()
     const articles = useSelector((state) => state.articles.articles)
+    const articleId = useSelector((state) => state.questionArticle.article)
     let column = []
     for (let a of articles) {
         column.push(
-          <button
-            className="articleQuestionBtn"
-            key={a.id}
-            onClick={() => {
-              dispatch(setCurrentQuestionNameAction(a.name))
-              dispatch(setCurrentQuestionArticleAction(a.id))
-            }}
-          >
-            {a.name}
-          </button>
+          <SideQuestionButton article={a} active={a.id === articleId}/>
         )
       }
     return (
-    <div className="QuestionsidePannel">
-        <h4>Your articles</h4>
+    <div className="questionsidePannel">
+        <h4 className="yourArticles">Your articles</h4>
         {column}
     </div>
     )

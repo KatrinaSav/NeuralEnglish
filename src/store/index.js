@@ -8,6 +8,7 @@ import { WordInfoReducer } from './WordInfoReducer'
 import { CurrentCollectionReducer } from './CurrentCollectionReducer'
 import { CardsReducer } from './CardsReducer'
 import { CurrentQuestionArticleReducer } from './CurrentQuestionArticleReducer' 
+import { CurrentAnswerReducer } from './CurrentAnswerReducer'
 
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   currentCollection: CurrentCollectionReducer,
   cards: CardsReducer,
   questionArticle: CurrentQuestionArticleReducer,
+  answer: CurrentAnswerReducer,
 })
 const store = configureStore({ reducer: rootReducer })
 export { store }

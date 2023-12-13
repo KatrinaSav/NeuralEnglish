@@ -3,7 +3,7 @@ import psycopg2
 
 
 def open_connection():
-    connection = psycopg2.connect(dbname="db_test", host="127.0.0.1", user="postgres", password="25072003")
+    connection = psycopg2.connect(dbname="db_test", host="127.0.0.1", user="postgres", password="123456789")
     cursor = connection.cursor()
     return connection, cursor
 
